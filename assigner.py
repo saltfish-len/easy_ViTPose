@@ -37,7 +37,15 @@ def assign_cmds(cmds: [str]):
     return session_created
 
 if __name__ == "__main__":
-    cmds = prepare_cmds(["seq1", "seq2", "seq3"], views, "output_new/myvit")
-    session_created = assign_cmds(cmds)
-    print(session_created)
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--sequences", nargs="+", type=str, required=True)
+    parser.add_argument("-o", "--output", type=str, required=True)
+    args = parser.parse_args()
+
+    cmds = prepare_cmds(args.sequences,views,args.output)
+    print(cmds)
+    if input("Continue? [Y/n]: ") in ["y","Y"]:
+        session_created = assign_cmds(cmds)
+        print(session_created)
 
