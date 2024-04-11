@@ -32,6 +32,7 @@ def assign_cmds(cmds: [str]):
         session_name = f"myvit_{i}"
         tmux.create_session(session_name)
         tmux.set_environment(session_name, "CUDA_VISIBLE_DEVICES", CUDA_VISIBLE_DEVICES[i])
+        tmux.run_command(session_name, "conda activate easyvit")
         tmux.run_command(session_name, cmd)
         session_created.append(session_name)
     return session_created
