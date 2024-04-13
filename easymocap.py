@@ -36,13 +36,13 @@ def prepare_args():
         else:
             print(f"Output path {os.path.join(scene, args.output)} already exists")
         # like a tree
-        print(f"{scene}")
-        print(f"├── {args.output}")
+        # print(f"{scene}")
+        # print(f"├── {args.output}")
         # check view video exists
         for view in args.view:
             if not os.path.exists(os.path.join(scene, "videos", f"{view}.mp4")):
                 raise FileNotFoundError(f"View {view} does not exist")
-            print(f"│   ├── {view}")
+            # print(f"│   ├── {view}")
             if not os.path.exists(os.path.join(scene, args.output, view)):
                 os.makedirs(os.path.join(scene, args.output, view))
     return args
