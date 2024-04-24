@@ -70,7 +70,7 @@ def main(args):
     assert torch.cuda.is_available(), "CUDA is not available!"
     # prepare model
     model_path = './models/vitpose-l-wholebody.pth'
-    model = VitInferenceWithMask(model_path, '', model_name='l', is_video=False, device=None,
+    model = VitInferenceWithMask(model_path, args.scene[0], model_name='l', is_video=False, device=None,
                                  num_people=args.num_people)
 
     for scene in args.scene:
