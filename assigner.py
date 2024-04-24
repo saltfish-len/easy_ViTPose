@@ -21,7 +21,7 @@ def prepare_cmds(seqs: [str], views: [str], output: str):
     for i, (s, v) in enumerate(pairs):
         devices_cmd[i % len(CUDA_VISIBLE_DEVICES)].append(f"python easymocap.py -s {s} -o {output} -v {v}")
     for i, cmds in enumerate(devices_cmd):
-        devices_cmd[i] = " && ".join(cmds)
+        devices_cmd[i] = " ; ".join(cmds)
     return devices_cmd
 
 
