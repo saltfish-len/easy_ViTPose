@@ -165,7 +165,8 @@ class VitInferenceWithMask:
         this is necessary to reset the tracker.
         """
         self.frame_counter = 0
-
+    def udpate_mask_path(self, mask_path):
+        self.mask_path = mask_path
     @classmethod
     def postprocess(cls, heatmaps, org_w, org_h):
         """
