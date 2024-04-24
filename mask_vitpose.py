@@ -99,7 +99,7 @@ def main(args):
                 keypoints = model.inference(img)
                 keypoints_dict[frame_id] = np.array([kpt[:23, [1, 0, 2]] for kpt in keypoints.values()])
                 # save keypoints
-                if len(keypoints_dict) == 1000:
+                if len(keypoints_dict) == 10:
                     with open(os.path.join(scene, args.output, view, f"{last_frame_id:06d}.pkl"), "wb") as f:
                         pickle.dump(keypoints_dict, f)
                     keypoints_dict = {}
