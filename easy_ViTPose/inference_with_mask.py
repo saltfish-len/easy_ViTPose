@@ -212,7 +212,7 @@ class VitInferenceWithMask:
 
         masks = []
         for i in range(self.num_people):
-            mask_path = os.path.join(self.mask_path, f"{i+1}/{self.frame_counter}.jpg")
+            mask_path = os.path.join(self.mask_path, f"{i+1}/{self.frame_counter}.png")
             mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)
             masks.append(mask)
         return masks
