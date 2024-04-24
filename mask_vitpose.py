@@ -18,7 +18,7 @@ def prepare_args():
                         help="Scene to be processed, be a list of PATH to scene base root")
     parser.add_argument("-v", '--view', nargs="+", type=str, help="View number")
     parser.add_argument("-o", '--output', type=str, help="Output dir, a relative path to the scene base root")
-    parser.add_argument("-p", '--num_people', type=str, help="number of people")
+    parser.add_argument("-p", '--num_people', type=int, help="number of people")
     parser.add_argument("--start", default=0, type=int, help="Start frame")
     parser.add_argument("--end", default=-1, type=int, help="End frame")
     parser.add_argument("--step", default=1, type=int, help="Step frame")
