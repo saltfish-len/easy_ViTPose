@@ -26,7 +26,7 @@ def prepare_args():
     args = parser.parse_args()
 
     print("Args: ", args)
-    print("output file structure: ")
+    # print("output file structure: ")
     # check all scenes exits
     for scene in args.scene:
         assert os.path.exists(scene), f"Scene {scene} does not exist"
@@ -34,15 +34,16 @@ def prepare_args():
         if not os.path.exists(os.path.join(scene, args.output)):
             os.makedirs(os.path.join(scene, args.output))
         else:
-            print(f"Output path {os.path.join(scene, args.output)} already exists")
+            pass
+            # print(f"Output path {os.path.join(scene, args.output)} already exists")
         # like a tree
-        print(f"{scene}")
-        print(f"├── {args.output}")
+        # print(f"{scene}")
+        # print(f"├── {args.output}")
         # check view video exists
         for view in args.view:
             if not os.path.exists(os.path.join(scene, "videos", f"{view}.mp4")):
                 raise FileNotFoundError(f"View {view} does not exist")
-            print(f"│   ├── {view}")
+            # print(f"│   ├── {view}")
             if not os.path.exists(os.path.join(scene, args.output, view)):
                 os.makedirs(os.path.join(scene, args.output, view))
     return args
