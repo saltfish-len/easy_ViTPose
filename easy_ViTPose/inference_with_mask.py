@@ -209,7 +209,6 @@ class VitInferenceWithMask:
         :param mask_path: 图片的路径, [scene_root]/images/[view_id]/[frame_id].jpg
         :return: masks: list[ndarray]
         """
-
         masks = []
         for i in range(self.num_people):
             mask_path = os.path.join(self.mask_path, f"{i+1}/{self.frame_counter}.png")
@@ -225,7 +224,14 @@ class VitInferenceWithMask:
         :return: xyxy 形式的bbox， 分别是x_min, y_min, x_max, y_max
         """
         xyhw = cv2.boundingRect(mask)
-        return np.array([xyhw[0], xyhw[1], xyhw[0] + xyhw[2], xyhw[1] + xyhw[3]])
+        # to range 0,1 in x and y
+        x_min = xyhw[0] / mask.shape[1]
+        y_min = xyhw[1] / mask.shape[0]
+        x_max = (xyhw[0] + xyhw[2]) / mask.shape[1]
+        y_max = (xyhw[1] + xyhw[3]) / mask.shape[0]
+        return np.array([x_min, y_min, x_max, y_max])
+
+
 
     def get_mask_bbox(self):
         masks = self.get_mask()
@@ -248,6 +254,8 @@ class VitInferenceWithMask:
 
         res_pd = np.array(self.get_mask_bbox())
         res_pd = np.concatenate([res_pd, np.ones((res_pd.shape[0], 1))], axis=1)
+        res_pd[:, [0, 2]] *= img.shape[1]
+        res_pd[:, [1, 3]] *= img.shape[0]
         self.frame_counter += 1
 
         frame_keypoints = {}
